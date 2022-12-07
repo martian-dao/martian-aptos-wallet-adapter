@@ -1,0 +1,35 @@
+{
+  "name": "martian-aptos-wallet-adapter",
+  "version": "0.0.1",
+  "description": "Official Martian Wallet Adapter for Aptos",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && cross-env NODE_ENV=production rm -rf dist && tsc -p .",
+    "publish_package": "npm run build && npm publish --public",
+    "clean": "rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://MartianAbhishek@github.com/martian-dao/martian-aptos-wallet-adapter.git"
+  },
+  "keywords": [
+    "Aptos",
+    "Martian Wallet",
+    "Move"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martian-dao/martian-aptos-wallet-adapter/issues"
+  },
+  "homepage": "https://github.com/martian-dao/martian-aptos-wallet-adapter#readme",
+  "dependencies": {
+    "@aptos-labs/wallet-adapter-core": "^0.1.4",
+    "aptos": "^1.4.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "typescript": "^4.9.3"
+  }
+}
