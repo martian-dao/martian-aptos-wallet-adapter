@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://MartianAbhishek@github.com/martian-dao/martian-aptos-wallet-adapter.git"
+    "url": "git+https://github.com/martian-dao/martian-aptos-wallet-adapter.git"
   },
   "keywords": [
     "Aptos",
