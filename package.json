@@ -3,33 +3,29 @@
   "version": "0.0.1",
   "description": "Official Martian Wallet Adapter for Aptos",
   "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "npm run clean && cross-env NODE_ENV=production rm -rf dist && tsc -p .",
+    "build": "npm run clean && tsup src/index.ts --format esm,cjs --dts",
+    "test": "jest",
     "publish_package": "npm run build && npm publish --public",
     "clean": "rm -rf dist"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/martian-dao/martian-aptos-wallet-adapter.git"
+  "license": "Apache-2.0",
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs",
+    "types": "./dist/index.d.ts"
   },
-  "keywords": [
-    "Aptos",
-    "Martian Wallet",
-    "Move"
-  ],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/martian-dao/martian-aptos-wallet-adapter/issues"
-  },
-  "homepage": "https://github.com/martian-dao/martian-aptos-wallet-adapter#readme",
   "dependencies": {
-    "@aptos-labs/wallet-adapter-core": "^0.1.4",
+    "@aptos-labs/wallet-adapter-core": "0.1.7",
     "aptos": "^1.4.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
-    "typescript": "^4.9.3"
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.3",
+    "@types/jest": "^29.2.3",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.3"
   }
 }
