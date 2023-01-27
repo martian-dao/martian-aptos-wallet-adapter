@@ -1,6 +1,6 @@
 {
   "name": "@martianwallet/aptos-wallet-adapter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Official Martian Wallet Adapter for Aptos",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
