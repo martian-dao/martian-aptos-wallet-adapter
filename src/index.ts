@@ -11,7 +11,7 @@ import type {
   SignMessageResponse,
   WalletName,
 } from "@aptos-labs/wallet-adapter-core";
-import { MaybeHexString, Types } from "aptos";
+import { BCS, MaybeHexString, TxnBuilderTypes, Types } from "aptos";
 interface MartianProvider
   extends Omit<PluginProvider, "signAndSubmitTransaction"> {
   signTransaction(
@@ -25,6 +25,10 @@ interface MartianProvider
   ): Promise<any>;
   signAndSubmitTransaction: (
     transaction: Types.TransactionPayload,
+    options?: any
+  ) => Promise<Types.HexEncodedBytes | AptosWalletErrorResult>;
+  signAndSubmitBCSTransaction: (
+    transaction: string,
     options?: any
   ) => Promise<Types.HexEncodedBytes | AptosWalletErrorResult>;
 }
@@ -99,6 +103,27 @@ export class MartianWallet implements AdapterPlugin {
       return { hash: response } as { hash: Types.HexEncodedBytes };
     } catch (error: any) {
       throw error;
+    }
+  }
+
+  async signAndSubmitBCSTransaction(
+    transaction: TxnBuilderTypes.TransactionPayload,
+    options?: any
+  ): Promise<{ hash: Types.HexEncodedBytes }> {
+    try {
+      const serializer = new BCS.Serializer();
+      transaction.serialize(serializer);
+      const response = await this.provider?.signAndSubmitBCSTransaction(
+        serializer.getBytes().toString(),
+        options
+      );
+      if ((response as AptosWalletErrorResult).code) {
+        throw new Error((response as AptosWalletErrorResult).message);
+      }
+      return { hash: response } as { hash: Types.HexEncodedBytes };
+    } catch (error: any) {
+      const errMsg = error.message;
+      throw errMsg;
     }
   }
 
