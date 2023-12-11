@@ -42,7 +42,7 @@ var MartianWallet = class {
       const tx = await this.provider?.generateTransaction(
         signer.address,
         transaction,
-        options
+        { ...options, max_gas_amount: options?.max_gas_amount?.toString() }
       );
       if (!tx)
         throw new Error(
